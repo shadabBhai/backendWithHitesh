@@ -27,6 +27,11 @@ const registerUser = asyncHandler(async(req,res)=>{
                   $or: [{userName} , {email}]
             }
        )
+       if(existedUser){
+            throw new ApiError( 409 , "User with email or user is exists")
+       }
+
+       req.files?.avatar[0]?.path
 
 
       }
