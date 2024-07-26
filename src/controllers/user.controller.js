@@ -1,5 +1,6 @@
 import {asyncHandler} from "../utils/asyncHandler.js";
 import {ApiError} from "../utils/ApiError.js"
+import {User} from '../models/user.model.js'
 
 
 const registerUser = asyncHandler(async(req,res)=>{
@@ -21,6 +22,11 @@ const registerUser = asyncHandler(async(req,res)=>{
         ) {
         throw new ApiError(400 , "All filed are  required")
        }
+       const existedUser = User.findOne(
+            {
+                  $or: [{userName} , {email}]
+            }
+       )
 
 
       }
